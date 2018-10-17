@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "View";
+
+}
+<script src="~/Scripts/esl.js"></script>
+<script src="~/Scripts/echarts.js"></script>
+<h2>Statistics for users' age</h2>
+<div id="main" style="width: 600px; height: 400px;"></div>
+<script type="text/javascript">
+       
+        $.ajax({
+            url: "/Staff/option",
+            type: 'Get',
+            dataType: 'text',
+            success: function (data) {
+
+                setOptionData(data);
+                //location.href="";
+            },
+        });
+
+       
+        function setOptionData(data) {
+            alert(data);
+            var option;
+            option = eval("(" + option + ")");
+            var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
+        }
+
+        //myChart.setOption(option);
+
+</script>
+

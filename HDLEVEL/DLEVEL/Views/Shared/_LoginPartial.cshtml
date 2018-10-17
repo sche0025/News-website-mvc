@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+
+                @{ string location = "/Photos/" + User.Identity.GetUserId() + ".jpg";
+                }
+                @if (System.IO.File.Exists(Server.MapPath(location)))
+                {
+                    int num = new Random().Next(1, 10000);
+                    {
+                        location = location + "?version=" + num;
+
+                    }
+                    <img src="@Url.Content(@location)" style="width:50px; height:48px" />
+                }
+                else
+                {
+                    <img src="/Images/question-mark.jpg" style="width:50px; height:48px" />
+                }
+
+            </li>
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+                        }
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>@Html.ActionLink("Register", "Create", "Staff", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        </ul>
+                    }

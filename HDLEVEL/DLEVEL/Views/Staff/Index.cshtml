@@ -1,0 +1,143 @@
+﻿@model IEnumerable<DLEVEL.Models.Staff>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Admin</h2>
+@*
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+*@
+<p class="alert-info">
+    You can search key words via the search bar!
+</p>
+    <p>
+       
+
+        @using (Html.BeginForm("Email", "Staff", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <table class="table" id="data">
+                <thead>
+                    <tr>
+                        <th>
+                            Select fo email
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.staff_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.company_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.phone)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.age)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="userEmail" value="@item.email" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.staff_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.company_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.phone)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.age)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.user_id }, new { @class = "btn btn-danger" }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.user_id }, new { @class = "btn btn-success" }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.user_id }, new { @class = "btn btn-info" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+            
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.staff_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.company_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.phone)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.age)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+                        </th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div style="color:red">
+                @if (TempData["Message"] != null)
+                {
+                    <div>
+                        @TempData["Message"]
+                    </div>
+                }
+            </div>
+            <label>Send emails to staff</label>
+            <div ng-controller="myController">
+                <dl class="dt-left">
+                    <dt>Subject:</dt>
+                    <dd><input type="text" name="title" ng-model="message1" class="form-control"></dd>
+                    <dt></dt>
+                    <dt></dt>
+                    <dt>Contecnt:</dt>
+                    <dd><textarea type="text" name="message" id="t1" class="form-control" ng-model="message" rows="12" cols="16"></textarea></dd>
+                    <dt>{{notice}} </dt>
+                    <dd>Subject:{{message1}}</dd>
+                    <dt>Contecnt:{{message}}</dt>
+
+                </dl>
+            </div>
+            <br />
+            <input type="submit" value="Send Email" name="SendEmail" />
+     
+        }

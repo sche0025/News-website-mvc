@@ -1,0 +1,159 @@
+﻿@model DLEVEL.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+@using Microsoft.AspNet.Identity;
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]
+        </dd>
+        <dt>External Logins:</dt>
+        <dd>
+            @Model.Logins.Count [
+            @Html.ActionLink("Manage", "ManageLogins") ]
+        </dd>
+
+        @*
+            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+             See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+             Uncomment the following block after you have set up two-factor authentication
+        *@
+        @*
+            <dt>Phone Number:</dt>
+            <dd>
+                @(Model.PhoneNumber ?? "None")
+                @if (Model.PhoneNumber != null)
+                {
+                    <br />
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                    }
+                }
+                else
+                {
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                }
+            </dd>
+        *@
+        <dt>Two-Factor Authentication:</dt>
+        <dd>
+            <p>
+                There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication.
+            </p>
+            @*@if (Model.TwoFactor)
+                {
+                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Enabled
+                        <input type="submit" value="Disable" class="btn btn-link" />
+                        </text>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Disabled
+                        <input type="submit" value="Enable" class="btn btn-link" />
+                        </text>
+                    }
+                }*@
+        </dd>
+
+        <dt>Edit my profile:</dt>
+        <dd>
+            @Html.ActionLink("Edit my profile", "EditMyProfile", "Staff")
+        </dd>
+    </dl>
+</div>
+@using (Html.BeginForm("Upload", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        Upload File:<input type="file" name="postedFile" accept=".png,.jpg,.jpeg,.gif" />
+    </div>
+    <br />
+    <tr>
+        <td>
+            <input type="submit" name="Upload" />
+        </td>
+        <td>
+       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        @{ string location = "/Photos/" + User.Identity.GetUserId() + ".jpg";
+        }
+        @if (System.IO.File.Exists(Server.MapPath(location)))
+        { int num = new Random().Next(1, 10000);
+            { location = location + "?version="+num; }
+              <img src="@Url.Content(@location)" style="width:100px; height:100px" />
+        }
+        else
+        {
+            <img src="/Images/question-mark.jpg" style="width:100px; height:100px" />
+        }
+    </td>
+</tr>
+    <div>
+        @if (TempData["Message"] != null)
+        {
+            <span style="color:darkorchid">
+                @TempData["Message"]
+            </span>
+        }
+    </div>
+
+
+
+    @*
+        <div>
+           @using Microsoft.AspNet.Identity;
+            @{ string location = "/Photos/" + User.Identity.GetUserId() + ".jpg";
+            }
+            <img src=@location style="width:100px; height:100px" />
+        </div>
+    *@
+            }
+
+@*
+    @using (Html.BeginForm("Upload", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <span>Uplaod my image</span>
+
+        <input type="file" name="file" value="Browse" />
+        <br />
+            <input type="submit" name="Upload" />
+            <span style="color:green">@ViewBag.Message</span>
+            @ViewBag.UploadSuccess
+        if (ViewBag.UploadSuccess == true)
+        {
+            <h2>Upload Completed Successfully</h2>
+        }
+    }
+    <img src="~/Photos/@ViewBag.path" style="width:100px; height:100px"/>
+*@
+
+
+

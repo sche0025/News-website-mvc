@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DLEVEL.Models.IndexViewModel>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>News</h2>
+<p class="alert-info">
+    You can search key words via the search bar!
+</p>
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table id="data">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Logins)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TwoFactor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Logins)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HasPassword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TwoFactor)
+                </td>
+                <td>
+              
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    @Html.ActionLink("Click here to see all administrators", "Register");
+</p>
+

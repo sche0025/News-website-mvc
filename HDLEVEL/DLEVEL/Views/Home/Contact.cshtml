@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/zingchart.min.js"></script>
+<script src="~/Scripts/zingchart-angularjs.js"></script>
+<address>
+    <strong>Support:</strong>   <a href="mailto:sche0025@student.monash.edu">sche0025@student.monash.edu</a><br />
+</address>
+
+<div ng-controller="myController">
+    <zingchart id="chart-1" zc-json="myJson" zc-values="myData"> </zingchart>
+</div>
+
+<script>
+    var app = angular.module('myModule', ['zingchart-angularjs']);
+    app.controller('myController', function ($scope) {
+
+        $scope.myData = [@ViewBag.ages[0],@ViewBag.ages[1],@ViewBag.ages[2],@ViewBag.ages[3],@ViewBag.ages[4]];
+        $scope.myJson = {
+            title: {
+                text:"Users' age distribution"
+            },
+            "scale-x": {
+                "labels": ["0-19", "20-39", "40-59", "60-79", "80+"]
+            },
+            "type":"bar"
+        }
+    });
+
+</script>

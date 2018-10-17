@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Help";
+}
+<div id="testdiv">
+
+</div>
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+<p id="warning">If you have any question about my website, then you have 2 options</p>
+<ol>
+    <li>
+        Contact &nbsp;<div class="line" style="text-decoration:line-through">Edward Chen</div>
+        &nbsp;<div class="line">My tutor --- Jian</div>
+    </li>
+    <li> Suffer it alone!</li>
+</ol>
+<p>
+    <h1>About Us: </h1>
+    Monash News was established on 21st September 2017, it was originally designed for assignment task, and however this website has already achieved professional level. So feel free to be out of our members.
+</p>
+<p>Developed by Edward Chen</p>
+<p>
+    <h2>To Do List</h2>
+</p>
+<div ng-controller="myController">
+    <form name="frm" ng-submit="addTodo()">
+        <input type="text" name="newTodo" ng-model="newTodo" required />
+        <button ng-disabled="frm.$invalid">Go</button>
+    </form>
+    <p>
+        After you have done one, feel free to check and clear!!!
+    </p>
+    <p />
+    <button ng-click="clear()">Clear Completed</button>
+  
+    <ul>
+        <li ng-repeat="todo in todos">
+            <input type="checkbox"  ng-model="todo.done"/>
+            <span ng-class="{'done':todo.done}">{{todo.title}}</span>
+        
+        </li>
+    </ul>
+</div>
+
+<script>
+
+
+</script>

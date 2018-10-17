@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Documentation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="myController">
+    <div class="jumbotron">
+        <div><button class="myButton" id="top" ng-click="scrollTo('bt')">Go to bottom of this page</button></div>
+        <h3>Designer's page</h3>
+        <img src="@Url.Content("~/Images/Edward.jpg")" />
+    </div>
+    <hr />
+    <h3 class="alert-success">Student Info</h3>
+    Show personal details <input type="checkbox" ng-model="hide" />
+    <table class="table">
+        <tr>
+            <th>Designer Name:</th>
+            <th ng-hide="hide">*****</th>
+            <th ng-show="hide">Edward Chen (Siyu)</th>        
+        </tr>
+
+        <tr>
+            <th>Email:</th>
+            <th ng-hide="hide">*****</th>
+            <th ng-show="hide"><a href="mailto:sche0025@student.monash.edu">sche0025@student.monash.edu</a> </th>  
+        </tr>
+        <tr>
+            <th>Designer ID:</th>
+            <th ng-hide="hide">*****</th>
+            <th ng-show="hide">ID: 27294315</th>  
+        </tr>
+        <tr>
+            <th>Unit Provider: </th>
+            <th> Monash University, The Caulfield School of Information Technology</th>
+        </tr>
+        <tr>
+            <th>Task number</th>
+            <th>5.3 <a href="http://moodle.vle.monash.edu/mod/page/view.php?id=4154651">Click for details</a></th>
+        </tr>
+        <tr>
+            <th> My Tutor</th>
+            <th>Jian<img src="@Url.Content("~/Images/Jian.jpg")" /></th>
+        </tr>
+    </table>
+    <p />
+
+    <hr />
+    <h3 class="alert-success">Image details</h3>
+    <table border="1">
+        <tr>
+            <th>Image</th>
+            <th>Author</th>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="@Url.Content("~/Images/Monash.jpg")" style="width:100px; height:100px">
+            </td>
+            <td>Monash Uni</td>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="@Url.Content("~/Images/question-mark.jpg")" style="width:100px; height:100px">
+            </td>
+            <td><a href="https://www.bing.com/images/search?view=detailV2&ccid=c2P1q07X&id=B8F6AC4B45F06AED567C51D5F25D40832E28BBA5&thid=OIP.c2P1q07XDhXB_6mG71fuTAEsEs&q=question+mark&simid=608042314346532263&selectedIndex=7&qpvt=question+mark&ajaxhist=0"> Google Pictures</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="@Url.Content("~/Images/kan.gif")" style="width:100px; height:100px">
+            </td>
+            <td><a href="https://giphy.com/gifs/kangaroo-eating-D10hKcRT6JaLu"> Google Pictures</a></td>
+        </tr>
+        <tr>
+            <td>
+                <img src="@Url.Content("~/Images/Jian.jpg")" style="width:100px; height:100px">
+            </td>
+            <td><a href="https://au.linkedin.com/in/jian-loong-liew-0433ab39"> Linked in</a></td>
+        </tr>
+    </table>
+    <div><button class="myButton" id="bt" ng-click="scrollTo('top')">Go to top of this page</button></div>
+</div>
+
